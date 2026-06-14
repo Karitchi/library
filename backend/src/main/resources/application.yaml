@@ -1,3 +1,11 @@
 spring:
   application:
     name: library
+  datasource:
+    url: jdbc:postgresql://localhost:5432/library
+    username: admin
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: none  # Don't modify your existing table
+    show-sql: true    # See SQL queries in console
