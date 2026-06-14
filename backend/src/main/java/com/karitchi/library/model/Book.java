@@ -1,60 +1,103 @@
 package com.karitchi.library.model;
 
+import jakarta.persistence.*;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "books")
 public class Book {
-    private String id;
-    private String title;
-    private String author;
-    private String description;
-    private Integer publishedYear;
-    private String genre;
-    private Integer pages;
-    private Double rating;
-    private Boolean inStock;
-    private Double price;
-    private String isbn;
 
-    // Constructors
-    public Book() {}
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    public Book(String id, String title, String author, Integer publishedYear, String genre) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.publishedYear = publishedYear;
-        this.genre = genre;
-    }
+  @Column(nullable = false)
+  private String title;
 
-    // Getters and Setters
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+  @Column(nullable = false)
+  private String author;
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+  @Column(columnDefinition = "TEXT")
+  private String summary;
 
-    public String getAuthor() { return author; }
-    public void setAuthor(String author) { this.author = author; }
+  @Column(name = "publication_date")
+  private LocalDate publicationDate;
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+  @Column(name = "total_quantity")
+  private Integer totalQuantity = 1;
 
-    public Integer getPublishedYear() { return publishedYear; }
-    public void setPublishedYear(Integer publishedYear) { this.publishedYear = publishedYear; }
+  @Column(name = "available_quantity")
+  private Integer availableQuantity = 1;
 
-    public String getGenre() { return genre; }
-    public void setGenre(String genre) { this.genre = genre; }
+  @Column(name = "created_at")
+  private LocalDate createdAt = LocalDate.now();
 
-    public Integer getPages() { return pages; }
-    public void setPages(Integer pages) { this.pages = pages; }
+  // Default constructor
+  public Book() {
+  }
 
-    public Double getRating() { return rating; }
-    public void setRating(Double rating) { this.rating = rating; }
+  // Getters and Setters
+  public Long getId() {
+    return id;
+  }
 
-    public Boolean getInStock() { return inStock; }
-    public void setInStock(Boolean inStock) { this.inStock = inStock; }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public Double getPrice() { return price; }
-    public void setPrice(Double price) { this.price = price; }
+  public String getTitle() {
+    return title;
+  }
 
-    public String getIsbn() { return isbn; }
-    public void setIsbn(String isbn) { this.isbn = isbn; }
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public String getAuthor() {
+    return author;
+  }
+
+  public void setAuthor(String author) {
+    this.author = author;
+  }
+
+  public String getSummary() {
+    return summary;
+  }
+
+  public void setSummary(String summary) {
+    this.summary = summary;
+  }
+
+  public LocalDate getPublicationDate() {
+    return publicationDate;
+  }
+
+  public void setPublicationDate(LocalDate publicationDate) {
+    this.publicationDate = publicationDate;
+  }
+
+  public Integer getTotalQuantity() {
+    return totalQuantity;
+  }
+
+  public void setTotalQuantity(Integer totalQuantity) {
+    this.totalQuantity = totalQuantity;
+  }
+
+  public Integer getAvailableQuantity() {
+    return availableQuantity;
+  }
+
+  public void setAvailableQuantity(Integer availableQuantity) {
+    this.availableQuantity = availableQuantity;
+  }
+
+  public LocalDate getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDate createdAt) {
+    this.createdAt = createdAt;
+  }
 }
