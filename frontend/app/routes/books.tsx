@@ -1,6 +1,7 @@
 import type { Route } from "./+types/books";
 import { BookCard } from "../components/BookCard";
 import { useState, useEffect } from "react";
+import { Link } from "react-router";  // Import Link
 
 // Client-only data loader
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
@@ -23,11 +24,16 @@ export default function Books({ loaderData }: Route.ComponentProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
       {books.map((book) => (
-        <BookCard
+        <Link
           key={book.id}
-          title={book.title}
-          author={book.author}
-        />
+          to={`/books/${book.id}`}  // Navigate to /books/1, /books/2, etc.
+          className="block no-underline hover:no-underline"
+        >
+          <BookCard
+            title={book.title}
+            author={book.author}
+          />
+        </Link>
       ))}
     </div>
   );
