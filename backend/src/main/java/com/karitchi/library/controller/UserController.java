@@ -10,14 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/auth")
 public class UserController {
 
   @Autowired
   private UserService userService;
 
   // POST endpoint to create a new user
-  @PostMapping("/register")
+  @PostMapping("/signup")
   public ResponseEntity<UserResponse> registerUser(@Valid @RequestBody UserRegistrationRequest request) {
     try {
       UserResponse newUser = userService.registerUser(request);

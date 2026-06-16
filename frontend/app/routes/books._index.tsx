@@ -5,11 +5,19 @@ import { Link } from "react-router";  // Import Link
 
 // Client-only data loader
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
-  // Fetch from your API endpoint
-  const response = await fetch('http://localhost:8080/api/books');
-  const result = await response.json();
+  const token = localStorage.getItem('token'); // Get the stored token
 
-  return { books: result };  // Extract and rename
+  const response = await fetch('http://localhost:8080/api/books', {
+    headers: {
+      'Authorization': `Bearer ${token}`  // Add the token here
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch books: ${response.status}`);
+  }
+
+  return { books: await response.json() };
 }
 
 // Optional: Show loading UI while clientLoader runs

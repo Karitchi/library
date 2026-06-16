@@ -16,7 +16,7 @@ public class AuthController {
   @Autowired
   private AuthService authService;
 
-  @PostMapping("/login")
+  @PostMapping("/signin")
   public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
     try {
       LoginResponse response = authService.authenticate(request);
