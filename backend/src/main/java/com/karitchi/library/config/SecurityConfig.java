@@ -28,7 +28,7 @@ public class SecurityConfig {
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/api/auth/signup", "/api/auth/signin").permitAll()
-            .requestMatchers("/api/rentals/all").hasRole("librarian")
+            .requestMatchers("/api/rentals/all", "/api/rentals/*/return").hasRole("librarian")
             .anyRequest().authenticated())
         .sessionManagement(session -> session
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

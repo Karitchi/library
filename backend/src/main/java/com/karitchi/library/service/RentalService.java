@@ -48,6 +48,29 @@ public class RentalService {
   }
 
   @Transactional
+  public RentalResponse returnRental(Long rentalId) {
+    Rental rental = rentalRepository.findById(rentalId)
+        .orElseThrow(() -> new RuntimeException("Rental not found"));
+
+    if (!"active".equals(rental.getStatus())) {
+      throw new RuntimeException("Rental is already returned");
+    }
+
+    rental.setReturnDate(LocalDate.now());
+    rental.setStatus("returned");
+    Rental saved = rentalRepository.save(rental);
+
+    Book book = rental.getBook();
+    book.setAvailableQuantity(book.getAvailableQuantity() + 1);
+    bookRepository.save(book);
+
+    return new RentalResponse(
+        saved.getId(), saved.getUser().getId(), saved.getUser().getEmail(),
+        book.getId(), book.getTitle(), book.getAuthor(),
+        saved.getRentDate(), saved.getDueDate(), saved.getStatus());
+  }
+
+  @Transactional
   public RentalResponse rentBook(String email, Long bookId, LocalDate dueDate) {
     User user = userRepository.findByEmail(email)
         .orElseThrow(() -> new RuntimeException("User not found"));
