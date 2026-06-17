@@ -23,6 +23,7 @@ export default function Signin() {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.role);
         navigate("/books");
       } else {
         setError("Invalid email or password");

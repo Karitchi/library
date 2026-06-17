@@ -1,4 +1,4 @@
-import type { Route } from "./+types/_protected.rentals";
+import type { Route } from "./+types/_protected.rentals.all";
 import { Link } from "react-router";
 
 interface Rental {
@@ -15,27 +15,27 @@ interface Rental {
 
 export async function clientLoader() {
   const token = localStorage.getItem('token');
-  const response = await fetch('http://localhost:8080/api/rentals', {
+  const response = await fetch('http://localhost:8080/api/rentals/all', {
     headers: { 'Authorization': `Bearer ${token}` }
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch rentals: ${response.status}`);
+    throw new Error(`Failed to fetch all rentals: ${response.status}`);
   }
 
   return { rentals: await response.json() as Rental[] };
 }
 
 export function HydrateFallback() {
-  return <div>Loading rentals...</div>;
+  return <div>Loading all rentals...</div>;
 }
 
-export default function Rentals({ loaderData }: Route.ComponentProps) {
+export default function AllRentals({ loaderData }: Route.ComponentProps) {
   const { rentals } = loaderData;
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">My Rentals</h1>
+      <h1 className="text-2xl font-bold mb-6">All Rentals</h1>
 
       {rentals.length === 0 ? (
         <p className="text-gray-500">No rentals yet.</p>
@@ -48,6 +48,7 @@ export default function Rentals({ loaderData }: Route.ComponentProps) {
                   {rental.bookTitle}
                 </Link>
                 <p className="text-sm text-gray-600">{rental.bookAuthor}</p>
+                <p className="text-xs text-gray-500">by {rental.userEmail}</p>
               </div>
               <div className="text-right text-sm">
                 <p>Due: {rental.dueDate}</p>

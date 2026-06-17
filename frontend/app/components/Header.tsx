@@ -5,8 +5,11 @@ export function Header() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
+  const role = typeof window !== "undefined" ? localStorage.getItem("role") : null;
+
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     navigate("/signin");
   };
 
@@ -25,6 +28,11 @@ export function Header() {
             <Link to="/rentals" className="block px-4 py-2 hover:bg-gray-100" onClick={() => setOpen(false)}>
               My Rentals
             </Link>
+            {role === "librarian" && (
+              <Link to="/rentals/all" className="block px-4 py-2 hover:bg-gray-100" onClick={() => setOpen(false)}>
+                All Rentals
+              </Link>
+            )}
             <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer">
               Logout
             </button>
