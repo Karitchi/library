@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { Route } from "./+types/_protected.rentals.all";
 import { Link } from "react-router";
 
@@ -31,7 +32,21 @@ export function HydrateFallback() {
 }
 
 export default function AllRentals({ loaderData }: Route.ComponentProps) {
-  const { rentals } = loaderData;
+  const [rentals, setRentals] = useState<Rental[]>(loaderData.rentals);
+
+  const handleReturn = async (rentalId: number) => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`http://localhost:8080/api/rentals/${rentalId}/return`, {
+      method: 'PUT',
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if (response.ok) {
+      setRentals(prev => prev.map(r =>
+        r.id === rentalId ? { ...r, status: "returned" } : r
+      ));
+    }
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -55,6 +70,11 @@ export default function AllRentals({ loaderData }: Route.ComponentProps) {
                 <p className={rental.status === "active" ? "text-green-600" : "text-gray-500"}>
                   {rental.status}
                 </p>
+                {rental.status === "active" && (
+                  <button onClick={() => handleReturn(rental.id)} className="mt-2 bg-green-600 text-white px-3 py-1 rounded text-xs hover:bg-green-700 cursor-pointer">
+                    Return
+                  </button>
+                )}
               </div>
             </div>
           ))}
