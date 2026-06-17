@@ -5,15 +5,18 @@ import { useState, useEffect } from "react";
 // Loader for individual book
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   const { id } = params;
-  const response = await fetch(`http://localhost:8080/api/books/${id}`);
+  const token = localStorage.getItem('token'); // Get the stored token
+  const response = await fetch(`http://localhost:8080/api/books/${id}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`  // Add the token here
+    }
+  });
 
   if (!response.ok) {
     throw new Error("Book not found");
   }
 
-  const book = await response.json();
-  console.log(book)
-  return { book };
+  return { book: await response.json() };
 }
 
 export function HydrateFallback() {
