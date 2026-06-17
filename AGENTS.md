@@ -48,3 +48,4 @@ Monorepo: `frontend/` (React), `backend/` (Spring Boot). No monorepo tool — ea
 | GET | `/api/rentals` | JWT |
 | GET | `/api/rentals/all` | JWT (librarian) |
 | POST | `/api/rentals` | JWT |
+| PUT | `/api/rentals/{id}/return` | JWT (librarian) |
