@@ -21,7 +21,7 @@ export function Header() {
           </div>
         )}
       </div>
-      <h1 className="text-center text-2xl">librarian</h1>
+      <Link to="/books" className="text-center text-2xl no-underline text-inherit">librarian</Link>
       <p>avatar</p>
     </div>
   );
