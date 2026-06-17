@@ -31,7 +31,6 @@ Monorepo: `frontend/` (React), `backend/` (Spring Boot). No monorepo tool — ea
 
 ## Known issues
 
-- **Auth split across controllers:** `AuthController.java` (signin) and `UserController.java` (signup) share `/api/auth` — consolidate
 - **Debug scaffolding:** `TestController.java`, `TestService.java`, `TestRepository.java`, `model/Test.java` reference a `test` table not in `schema.sql` — remove
 - **Dead code:** `BooksResponse.java` (DTO) is never used; Lombok in `pom.xml` is declared but unused (manual getters/setters everywhere)
 - **Stub controller:** `AuthorController.java` returns hardcoded strings, doesn't follow the layered pattern

@@ -2,7 +2,10 @@ package com.karitchi.library.controller;
 
 import com.karitchi.library.dto.LoginRequest;
 import com.karitchi.library.dto.LoginResponse;
+import com.karitchi.library.dto.UserRegistrationRequest;
+import com.karitchi.library.dto.UserResponse;
 import com.karitchi.library.service.AuthService;
+import com.karitchi.library.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +19,9 @@ public class AuthController {
   @Autowired
   private AuthService authService;
 
+  @Autowired
+  private UserService userService;
+
   @PostMapping("/signin")
   public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
     try {
@@ -27,7 +33,21 @@ public class AuthController {
     }
   }
 
-  // Inner class for error response
+  @PostMapping("/signup")
+  public ResponseEntity<UserResponse> registerUser(@Valid @RequestBody UserRegistrationRequest request) {
+    try {
+      UserResponse newUser = userService.registerUser(request);
+      return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+    } catch (RuntimeException e) {
+      return ResponseEntity.badRequest().build();
+    }
+  }
+
+  @GetMapping("/check-email")
+  public ResponseEntity<?> checkEmailExists(@RequestParam String email) {
+    return ResponseEntity.ok().build();
+  }
+
   static class ErrorResponse {
     private String error;
 
