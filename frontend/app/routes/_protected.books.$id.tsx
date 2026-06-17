@@ -96,7 +96,7 @@ export default function BookDetail({ loaderData }: Route.ComponentProps) {
       <button
         onClick={handleRent}
         disabled={renting || book.availableQuantity <= 0}
-        className="mt-6 bg-black text-white px-6 py-2 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+        className="fixed bottom-8 right-8 z-50 bg-black text-white px-6 py-2 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {renting ? "Renting..." : book.availableQuantity <= 0 ? "Unavailable" : "Louer"}
       </button>
