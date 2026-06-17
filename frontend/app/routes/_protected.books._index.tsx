@@ -27,7 +27,7 @@ export default function Books({ loaderData }: Route.ComponentProps) {
   const { books } = loaderData;  // books is the actual array
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {books.map((book) => (
         <Link
           key={book.id}
