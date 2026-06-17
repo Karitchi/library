@@ -29,12 +29,9 @@ Monorepo: `frontend/` (React), `backend/` (Spring Boot). No monorepo tool — ea
 - **API base URL** is hardcoded `http://localhost:8080` in frontend code
 - **Adding an endpoint:** bottom-up: DTO → Model → Repository → Service → Controller → (SecurityConfig if access rules change)
 
-## Known issues
+## Environment
 
-- **Debug scaffolding:** `TestController.java`, `TestService.java`, `TestRepository.java`, `model/Test.java` reference a `test` table not in `schema.sql` — remove
-- **Dead code:** `BooksResponse.java` (DTO) is never used; Lombok in `pom.xml` is declared but unused (manual getters/setters everywhere)
-- **Stub controller:** `AuthorController.java` returns hardcoded strings, doesn't follow the layered pattern
-- **Security:** JWT secret has a hardcoded fallback — set `JWT_SECRET` env var in production
+- **`backend/.env`** is loaded automatically by `spring-dotenv` at startup (gitignored). Contains `JWT_SECRET` and `JWT_EXPIRATION`. Copy from `.env.example` if missing.
 
 ## API endpoints
 
@@ -47,6 +44,5 @@ Monorepo: `frontend/` (React), `backend/` (Spring Boot). No monorepo tool — ea
 | GET | `/api/books/{id}` | JWT |
 | POST | `/api/books` | JWT |
 | GET | `/api/authors` | JWT |
-| GET | `/api/authors/{id}` | JWT |
-| POST | `/api/authors` | JWT |
-| GET | `/api/test` | JWT |
+| GET | `/api/authors/{author}` | JWT |
+| POST | `/api/rentals` | JWT |
