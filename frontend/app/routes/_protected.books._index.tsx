@@ -32,7 +32,6 @@ export default function Books({ loaderData }: Route.ComponentProps) {
         <Link
           key={book.id}
           to={`/books/${book.id}`}  // Navigate to /books/1, /books/2, etc.
-          className="block no-underline hover:no-underline"
         >
           <BookCard
             title={book.title}
