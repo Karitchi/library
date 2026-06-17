@@ -1,14 +1,12 @@
 import type { Route } from "./+types/book.$id";
-import { useParams } from "react-router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-// Loader for individual book
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   const { id } = params;
-  const token = localStorage.getItem('token'); // Get the stored token
+  const token = localStorage.getItem('token');
   const response = await fetch(`http://localhost:8080/api/books/${id}`, {
     headers: {
-      'Authorization': `Bearer ${token}`  // Add the token here
+      'Authorization': `Bearer ${token}`
     }
   });
 
@@ -25,10 +23,42 @@ export function HydrateFallback() {
 
 export default function BookDetail({ loaderData }: Route.ComponentProps) {
   const { book } = loaderData;
+  const [renting, setRenting] = useState(false);
+  const [rentError, setRentError] = useState("");
+  const [rentSuccess, setRentSuccess] = useState(false);
 
   if (!book) {
     return <div>Book not found</div>;
   }
+
+  const handleRent = async () => {
+    setRenting(true);
+    setRentError("");
+    setRentSuccess(false);
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch("http://localhost:8080/api/rentals", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ bookId: book.id }),
+      });
+
+      if (response.ok) {
+        setRentSuccess(true);
+      } else {
+        const data = await response.json();
+        setRentError(data.error || "Failed to rent book");
+      }
+    } catch (err) {
+      setRentError("Cannot connect to server");
+    } finally {
+      setRenting(false);
+    }
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -51,8 +81,24 @@ export default function BookDetail({ loaderData }: Route.ComponentProps) {
             </div>
           </div>
 
-          <button className="mt-6 bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition-colors">
-            Rent This Book
+          {rentSuccess && (
+            <div className="mt-4 bg-green-100 text-green-700 p-2 rounded text-sm">
+              Book rented successfully!
+            </div>
+          )}
+
+          {rentError && (
+            <div className="mt-4 bg-red-100 text-red-700 p-2 rounded text-sm">
+              {rentError}
+            </div>
+          )}
+
+          <button
+            onClick={handleRent}
+            disabled={renting || book.availableQuantity <= 0}
+            className="mt-6 bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {renting ? "Renting..." : book.availableQuantity <= 0 ? "Unavailable" : "Rent This Book"}
           </button>
         </div>
       </div>
