@@ -23,7 +23,7 @@ export function HydrateFallback() {
 }
 
 export default function BookDetail({ loaderData }: Route.ComponentProps) {
-  const { book } = loaderData;
+  const [book, setBook] = useState(loaderData.book);
   const [renting, setRenting] = useState(false);
   const [rentError, setRentError] = useState("");
   const [rentSuccess, setRentSuccess] = useState(false);
@@ -50,6 +50,7 @@ export default function BookDetail({ loaderData }: Route.ComponentProps) {
 
       if (response.ok) {
         setRentSuccess(true);
+        setBook(prev => ({ ...prev, availableQuantity: prev.availableQuantity - 1 }));
       } else {
         const data = await response.json();
         setRentError(data.error || "Échec de l'emprunt");
