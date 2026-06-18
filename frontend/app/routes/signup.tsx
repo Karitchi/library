@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthForm } from "../components/AuthForm";
 
 export default function Signup() {
@@ -19,14 +19,26 @@ export default function Signup() {
   };
 
   return (
-    <AuthForm
-      title="Sign Up"
-      submitLabel="Sign Up"
-      submittingLabel="Creating..."
-      onSubmit={handleSubmit}
-      bottomText="Already have an account?"
-      bottomLink="/signin"
-      bottomLinkLabel="Sign In"
-    />
+    <div>
+      <div className="flex items-center justify-center text-lg mb-6">
+        <div className="border flex border-white">
+          <Link to="/signin" className="border-r border-white p-1 bg-black text-white no-underline">
+            Connexion
+          </Link>
+          <Link to="/signup" className="p-1 bg-white text-black no-underline">
+            Inscription
+          </Link>
+        </div>
+      </div>
+      <AuthForm
+        title="Inscription"
+        submitLabel="Inscription"
+        submittingLabel="Inscription en cours..."
+        onSubmit={handleSubmit}
+        bottomText="Déjà un compte ?"
+        bottomLink="/signin"
+        bottomLinkLabel="Connexion"
+      />
+    </div>
   );
 }
