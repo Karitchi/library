@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 import { AuthForm } from "../components/AuthForm";
 import { AuthTabs } from "../components/AuthTabs";
 
@@ -19,6 +20,7 @@ export default function Signin() {
     const data = await response.json();
     localStorage.setItem("token", data.token);
     localStorage.setItem("role", data.role);
+    toast.success("Connecté avec succès");
     navigate("/books");
   };
 

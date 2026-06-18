@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
+import { toast } from "sonner";
 
 export function AvatarMenu() {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ export function AvatarMenu() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+    toast.success("Déconnecté avec succès");
     navigate("/signin");
   };
 

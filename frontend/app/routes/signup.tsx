@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 import { AuthForm } from "../components/AuthForm";
 import { AuthTabs } from "../components/AuthTabs";
 
@@ -16,6 +17,7 @@ export default function Signup() {
       throw new Error("Signup failed. Email may already exist.");
     }
 
+    toast.success("Inscription réussie");
     navigate("/signin");
   };
 
