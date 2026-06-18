@@ -1,0 +1,38 @@
+name: library
+
+services:
+  db:
+    image: postgres:18
+    restart: unless-stopped
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: library
+    volumes:
+      - library-db:/var/lib/postgresql
+    ports:
+      - 5432:5432
+
+  api:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      - db
+    env_file: ./backend/.env
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/library
+      SPRING_DATASOURCE_USERNAME: admin
+    ports:
+      - 8080:8080
+
+  web:
+    build: ./frontend
+    restart: unless-stopped
+    environment:
+      PORT: 3000
+    ports:
+      - 3000:3000
+
+volumes:
+  library-db:
