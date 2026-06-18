@@ -22,15 +22,15 @@ export function AvatarMenu() {
       </button>
       {open && (
         <div className="absolute right-0 top-10 bg-black shadow-md z-10">
-          <Link to="/rentals" className="block px-4 py-2 text-white hover:bg-gray-800" onClick={() => setOpen(false)}>
+          <Link to="/rentals" className="block px-4 py-2 text-white border border-transparent hover:bg-white hover:text-black hover:border-black" onClick={() => setOpen(false)}>
             Mes locations
           </Link>
           {role === "librarian" && (
-            <Link to="/rentals/all" className="block px-4 py-2 text-white hover:bg-gray-800" onClick={() => setOpen(false)}>
+            <Link to="/rentals/all" className="block px-4 py-2 text-white border border-transparent hover:bg-white hover:text-black hover:border-black" onClick={() => setOpen(false)}>
               Toutes les locations
             </Link>
           )}
-          <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 cursor-pointer">
+          <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-white border border-transparent hover:bg-white hover:text-black hover:border-black cursor-pointer">
             Déconnexion
           </button>
         </div>
