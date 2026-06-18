@@ -35,7 +35,7 @@ export default function Rentals({ loaderData }: Route.ComponentProps) {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6 underline">Mes locations</h1>
+      <h1 className="text-lg underline mb-6">Mes locations</h1>
 
       {rentals.length === 0 ? (
         <p>Aucune location pour le moment.</p>
