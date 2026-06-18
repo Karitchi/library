@@ -29,7 +29,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <Toaster
           toastOptions={{
-            style: { background: "#000", color: "#fff", border: "1px solid #fff" },
+            style: { background: "#000", color: "#fff", border: "1px solid #fff", borderRadius: 0 },
           }}
         />
         <ScrollRestoration />
