@@ -20,39 +20,39 @@ export async function clientLoader() {
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch rentals: ${response.status}`);
+    throw new Error(`Échec du chargement des locations : ${response.status}`);
   }
 
   return { rentals: await response.json() as Rental[] };
 }
 
 export function HydrateFallback() {
-  return <div>Loading rentals...</div>;
+  return <div>Chargement...</div>;
 }
 
 export default function Rentals({ loaderData }: Route.ComponentProps) {
   const { rentals } = loaderData;
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">My Rentals</h1>
+    <div>
+      <h1 className="text-2xl font-bold mb-6 underline">Mes locations</h1>
 
       {rentals.length === 0 ? (
-        <p className="text-gray-500">No rentals yet.</p>
+        <p>Aucune location pour le moment.</p>
       ) : (
         <div className="space-y-4">
           {rentals.map((rental: Rental) => (
-            <div key={rental.id} className="bg-gray-50 p-4 rounded-lg flex justify-between items-center">
+            <div key={rental.id} className="bg-black p-4 flex justify-between items-center">
               <div>
-                <Link to={`/books/${rental.bookId}`} className="text-lg font-semibold text-blue-600 hover:underline">
+                <Link to={`/books/${rental.bookId}`} className="text-lg text-white border border-transparent hover:bg-white hover:text-black hover:border-black no-underline">
                   {rental.bookTitle}
                 </Link>
-                <p className="text-sm text-gray-600">{rental.bookAuthor}</p>
+                <p className="text-sm text-gray-400">{rental.bookAuthor}</p>
               </div>
               <div className="text-right text-sm">
-                <p>Due: {rental.dueDate}</p>
-                <p className={rental.status === "active" ? "text-green-600" : "text-gray-500"}>
-                  {rental.status}
+                <p className="text-white">Échéance : {rental.dueDate}</p>
+                <p className={rental.status === "active" ? "text-white" : "text-gray-400"}>
+                  {rental.status === "active" ? "Actif" : "Retourné"}
                 </p>
               </div>
             </div>
