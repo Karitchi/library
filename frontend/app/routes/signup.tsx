@@ -19,26 +19,26 @@ export default function Signup() {
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-center text-lg mb-6">
-        <div className="border border-white flex">
-          <Link to="/signin" className="border-r border-white p-1 bg-white text-black no-underline">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="border border-white">
+        <div className="flex text-lg border-b border-white">
+          <Link to="/signin" className="p-1 bg-white text-black no-underline border-r border-white">
             Connexion
           </Link>
           <Link to="/signup" className="p-1 bg-black text-white no-underline">
             Inscription
           </Link>
         </div>
+        <AuthForm
+          title="Inscription"
+          submitLabel="Inscription"
+          submittingLabel="Inscription en cours..."
+          onSubmit={handleSubmit}
+          bottomText="Déjà un compte ?"
+          bottomLink="/signin"
+          bottomLinkLabel="Connexion"
+        />
       </div>
-      <AuthForm
-        title="Inscription"
-        submitLabel="Inscription"
-        submittingLabel="Inscription en cours..."
-        onSubmit={handleSubmit}
-        bottomText="Déjà un compte ?"
-        bottomLink="/signin"
-        bottomLinkLabel="Connexion"
-      />
     </div>
   );
 }

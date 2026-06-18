@@ -22,26 +22,26 @@ export default function Signin() {
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-center text-lg mb-6">
-        <div className="border border-white flex">
-          <Link to="/signin" className="border-r border-white p-1 bg-black text-white no-underline">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="border border-white">
+        <div className="flex text-lg border-b border-white">
+          <Link to="/signin" className="p-1 bg-black text-white no-underline border-r border-white">
             Connexion
           </Link>
           <Link to="/signup" className="p-1 bg-white text-black no-underline">
             Inscription
           </Link>
         </div>
+        <AuthForm
+          title="Connexion"
+          submitLabel="Connexion"
+          submittingLabel="Connexion en cours..."
+          onSubmit={handleSubmit}
+          bottomText="Pas encore de compte ?"
+          bottomLink="/signup"
+          bottomLinkLabel="Inscription"
+        />
       </div>
-      <AuthForm
-        title="Connexion"
-        submitLabel="Connexion"
-        submittingLabel="Connexion en cours..."
-        onSubmit={handleSubmit}
-        bottomText="Pas encore de compte ?"
-        bottomLink="/signup"
-        bottomLinkLabel="Inscription"
-      />
     </div>
   );
 }

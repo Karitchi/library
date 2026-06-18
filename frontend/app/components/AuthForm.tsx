@@ -32,8 +32,7 @@ export function AuthForm({ title, submitLabel, submittingLabel, onSubmit, bottom
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="bg-black p-8 w-96">
+    <div className="bg-black p-8 w-96">
         <h1 className="text-2xl mb-6 text-center text-white">{title}</h1>
 
         {error && (
@@ -81,6 +80,5 @@ export function AuthForm({ title, submitLabel, submittingLabel, onSubmit, bottom
           </Link>
         </p>
       </div>
-    </div>
   );
 }
