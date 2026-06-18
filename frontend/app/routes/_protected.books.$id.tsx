@@ -12,14 +12,14 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   });
 
   if (!response.ok) {
-    throw new Error("Book not found");
+    throw new Error("Livre introuvable");
   }
 
   return { book: await response.json() };
 }
 
 export function HydrateFallback() {
-  return <div>Loading book details...</div>;
+  return <div>Chargement...</div>;
 }
 
 export default function BookDetail({ loaderData }: Route.ComponentProps) {
@@ -29,7 +29,7 @@ export default function BookDetail({ loaderData }: Route.ComponentProps) {
   const [rentSuccess, setRentSuccess] = useState(false);
 
   if (!book) {
-    return <div>Book not found</div>;
+    return <div>Livre introuvable</div>;
   }
 
   const handleRent = async () => {
@@ -52,10 +52,10 @@ export default function BookDetail({ loaderData }: Route.ComponentProps) {
         setRentSuccess(true);
       } else {
         const data = await response.json();
-        setRentError(data.error || "Failed to rent book");
+        setRentError(data.error || "Échec de l'emprunt");
       }
     } catch (err) {
-      setRentError("Cannot connect to server");
+      setRentError("Impossible de se connecter au serveur");
     } finally {
       setRenting(false);
     }
@@ -68,22 +68,22 @@ export default function BookDetail({ loaderData }: Route.ComponentProps) {
         author={book.author}
       />
       <div>
-        <h3 className="text-md">Résumé</h3>
-        <p className="">{book.summary || "No summary available"}</p>
+        <h3 className="text-lg underline">Résumé</h3>
+        <p className="">{book.summary || "Aucun résumé disponible"}</p>
       </div>
 
       <div>
-        <h3 className="text-md">Date de publication</h3>
-        <p>{book.publicationDate || "Unknown"}</p>
+        <h3 className="text-lg underline">Date de publication</h3>
+        <p>{book.publicationDate || "Inconnue"}</p>
       </div>
       <div>
-        <h3 className="text-md">Available Copies</h3>
+        <h3 className="text-lg underline">Exemplaires disponibles</h3>
         <p>{book.availableQuantity} / {book.totalQuantity}</p>
       </div>
 
       {rentSuccess && (
         <div className="">
-          Book rented successfully!
+          Livre emprunté avec succès !
         </div>
       )}
 
@@ -96,9 +96,9 @@ export default function BookDetail({ loaderData }: Route.ComponentProps) {
       <button
         onClick={handleRent}
         disabled={renting || book.availableQuantity <= 0}
-        className="fixed bottom-8 right-8 z-50 bg-black text-white px-6 py-2 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+        className=" bg-black text-white px-6 py-2 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {renting ? "Renting..." : book.availableQuantity <= 0 ? "Unavailable" : "Louer"}
+        {renting ? "Emprunt en cours..." : book.availableQuantity <= 0 ? "Indisponible" : "Louer"}
       </button>
     </div>
   );
