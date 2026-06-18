@@ -21,11 +21,11 @@ export default function Signup() {
   return (
     <div>
       <div className="flex items-center justify-center text-lg mb-6">
-        <div className="border flex border-white">
-          <Link to="/signin" className="border-r border-white p-1 bg-black text-white no-underline">
+        <div className="border border-white flex">
+          <Link to="/signin" className="border-r border-white p-1 bg-white text-black no-underline">
             Connexion
           </Link>
-          <Link to="/signup" className="p-1 bg-white text-black no-underline">
+          <Link to="/signup" className="p-1 bg-black text-white no-underline">
             Inscription
           </Link>
         </div>
