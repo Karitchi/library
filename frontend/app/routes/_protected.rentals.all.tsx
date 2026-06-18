@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Route } from "./+types/_protected.rentals.all";
 import { Link } from "react-router";
+import { toast } from "sonner";
 
 interface Rental {
   id: number;
@@ -45,6 +46,7 @@ export default function AllRentals({ loaderData }: Route.ComponentProps) {
       setRentals(prev => prev.map(r =>
         r.id === rentalId ? { ...r, status: "returned" } : r
       ));
+      toast.success("Livre retourné avec succès !");
     }
   };
 
