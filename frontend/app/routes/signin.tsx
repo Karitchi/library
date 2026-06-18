@@ -1,5 +1,6 @@
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { AuthForm } from "../components/AuthForm";
+import { AuthTabs } from "../components/AuthTabs";
 
 export default function Signin() {
   const navigate = useNavigate();
@@ -23,16 +24,7 @@ export default function Signin() {
 
   return (
     <div>
-      <div className="flex justify-center text-lg">
-        <div className="border border-black flex">
-          <Link to="/signin" className="p-1 bg-black text-white no-underline border-r border-black">
-            Connexion
-          </Link>
-          <Link to="/signup" className="p-1 bg-white text-black no-underline">
-            Inscription
-          </Link>
-        </div>
-      </div>
+      <AuthTabs />
       <div className="min-h-screen flex items-center justify-center">
         <AuthForm
           title="Connexion"
