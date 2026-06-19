@@ -1,6 +1,7 @@
 import type { Route } from "./+types/_protected.books.$id";
 import { BookCard } from "../components/BookCard";
 import { useState } from "react";
+import { Link } from "react-router";
 import { toast } from "sonner";
 
 interface Book {
@@ -72,6 +73,12 @@ export default function BookDetail({ loaderData }: Route.ComponentProps) {
 
   return (
     <div className="space-y-5">
+      <Link to="/books" className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-white no-underline">
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+        Retour aux livres
+      </Link>
       <BookCard
         title={book.title}
         author={book.author}
