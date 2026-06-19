@@ -23,7 +23,7 @@ Monorepo: `frontend/` (React), `backend/` (Spring Boot). No monorepo tool — ea
   - `docker compose up -d` — starts Postgres on `:5432` and Adminer on `:8081`
   - `./mvnw spring-boot:run` — starts backend on `:8080`
   - `./mvnw test` — runs tests (only a single context-load smoke test exists)
-- **Schema:** `src/main/resources/schema.sql` runs on every startup (`spring.sql.init.mode=always`) — drops and recreates all tables
+- **Schema:** `src/main/resources/schema.sql` runs on every startup (`spring.sql.init.mode=always`) — **idempotent**: uses `CREATE TABLE IF NOT EXISTS` and `ON CONFLICT DO NOTHING` so data survives restarts. Same for `data.sql` (book seeds).
 - **Layered structure:** `controller/` → `service/` → `repository/` → DB; `dto/` for request/response classes; `model/` for JPA entities; `security/` for JWT; `config/` for Spring config
 - **Auth:** Token stored in `localStorage("token")` by frontend, sent as `Authorization: Bearer <token>` header
 - **API base URL** is hardcoded `http://localhost:8080` in frontend code
@@ -32,6 +32,9 @@ Monorepo: `frontend/` (React), `backend/` (Spring Boot). No monorepo tool — ea
 ## Environment
 
 - **`backend/.env`** is loaded automatically by `spring-dotenv` at startup (gitignored). Contains `JWT_SECRET` and `JWT_EXPIRATION`. Copy from `.env.example` if missing.
+- **`frontend/.env`** contains `VITE_API_URL` (gitignored). Copy from `frontend/.env.example` if missing.
+- **`.env.example` files** (root, `backend/`, `frontend/`) are committed to git — copy to `.env` and fill values.
+- **`show-sql: false`** — SQL logging disabled for production.
 
 ## API endpoints
 

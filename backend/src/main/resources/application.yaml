@@ -7,12 +7,12 @@ spring:
     password: ${DB_PASSWORD}
   sql:
     init:
-      mode: always  # Always run schema.sql on startup
+      mode: always  # Safe: schema.sql is now idempotent (CREATE IF NOT EXISTS + ON CONFLICT DO NOTHING)
       platform: postgresql
   jpa:
     hibernate:
       ddl-auto: none  # Don't modify your existing table
-    show-sql: true    # See SQL queries in console
+    show-sql: false
   jwt:
     secret: ${JWT_SECRET}
     expiration: ${JWT_EXPIRATION}

@@ -1,16 +1,11 @@
-DROP TABLE IF EXISTS rentals CASCADE;
-DROP TABLE IF EXISTS books CASCADE;
-DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS roles CASCADE;
-
 -- Roles table
-CREATE TABLE roles (
+CREATE TABLE IF NOT EXISTS roles (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) UNIQUE NOT NULL
 );
 
 -- Users table
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -19,7 +14,7 @@ CREATE TABLE users (
 );
 
 -- Books table (with quantity directly)
-CREATE TABLE books (
+CREATE TABLE IF NOT EXISTS books (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     author VARCHAR(255) NOT NULL,
@@ -31,7 +26,7 @@ CREATE TABLE books (
 );
 
 -- Rentals table
-CREATE TABLE rentals (
+CREATE TABLE IF NOT EXISTS rentals (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id),
     book_id INTEGER NOT NULL REFERENCES books(id),
@@ -45,16 +40,17 @@ CREATE TABLE rentals (
     )
 );
 
--- Insert default roles
-INSERT INTO roles (name) VALUES ('librarian'), ('user');
+-- Insert default roles (skip if already exist)
+INSERT INTO roles (name) VALUES ('librarian'), ('user')
+ON CONFLICT (name) DO NOTHING;
 
--- Insert default users (password: "testtest")
+-- Insert default users (password: "testtest") only if they don't already exist
 INSERT INTO users (email, password, role_id) VALUES
   ('librarian@library.com', '$2a$10$l/InOIIhaW6C3.HENn5oPOf5NF.YUOLl0rLR76VKrHXoziCBLz7oq', 1),
-  ('user@library.com', '$2a$10$l/InOIIhaW6C3.HENn5oPOf5NF.YUOLl0rLR76VKrHXoziCBLz7oq', 2);
+  ('user@library.com', '$2a$10$l/InOIIhaW6C3.HENn5oPOf5NF.YUOLl0rLR76VKrHXoziCBLz7oq', 2)
+ON CONFLICT (email) DO NOTHING;
 
--- Indexes
-CREATE INDEX idx_rentals_user_id ON rentals(user_id);
-CREATE INDEX idx_rentals_book_id ON rentals(book_id);
-CREATE INDEX idx_rentals_status ON rentals(status);
+CREATE INDEX IF NOT EXISTS idx_rentals_user_id ON rentals(user_id);
+CREATE INDEX IF NOT EXISTS idx_rentals_book_id ON rentals(book_id);
+CREATE INDEX IF NOT EXISTS idx_rentals_status ON rentals(status);
 
