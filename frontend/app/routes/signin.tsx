@@ -42,8 +42,8 @@ export default function Signin() {
           <div className="border border-black p-4 text-sm max-w-md space-y-1">
             <p>Ceci est un projet test pour apprendre Java Spring Boot.</p>
             <p>Deux utilisateurs sont disponibles par défaut :</p>
-            <p><span className="font-bold">user@library.com</span> / testtest (utilisateur)</p>
-            <p><span className="font-bold">librarian@library.com</span> / testtest (bibliothécaire)</p>
+            <p><span className="font-bold">user@library.com</span> — mot de passe : <span className="font-bold">testtest</span> (utilisateur)</p>
+            <p><span className="font-bold">librarian@library.com</span> — mot de passe : <span className="font-bold">testtest</span> (bibliothécaire)</p>
             <p className="mt-2">Fonctionnalités : parcourir les livres, consulter les détails, louer des livres, gérer les retours.</p>
           </div>
         </div>
