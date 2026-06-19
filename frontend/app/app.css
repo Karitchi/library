@@ -3,18 +3,21 @@
 @font-face {
   font-family: "Jacquard 24";
   src: url("/fonts/jacquard24.ttf") format("truetype");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "K2D";
   src: url("/fonts/k2d-regular.ttf") format("truetype");
   font-weight: 400;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "K2D";
   src: url("/fonts/k2d-bold.ttf") format("truetype");
   font-weight: 700;
+  font-display: swap;
 }
 
 @theme {

@@ -22,11 +22,11 @@ export function HydrateFallback() {
 }
 
 export default function Books({ loaderData }: Route.ComponentProps) {
-  const { books } = loaderData;
+  const { books } = loaderData as { books: { id: number; title: string; author: string; coverImage: string | null }[] };
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {books.map((book) => (
+      {books.map((book, i) => (
         <Link
           key={book.id}
           to={`/books/${book.id}`}
@@ -36,6 +36,7 @@ export default function Books({ loaderData }: Route.ComponentProps) {
             title={book.title}
             author={book.author}
             coverImage={book.coverImage}
+            priority={i === 0}
           />
         </Link>
       ))}

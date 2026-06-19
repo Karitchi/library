@@ -2,9 +2,10 @@ interface BookCardProps {
   title: string
   author: string
   coverImage?: string | null
+  priority?: boolean
 }
 
-export function BookCard({ title, author, coverImage }: BookCardProps) {
+export function BookCard({ title, author, coverImage, priority }: BookCardProps) {
   const imgSrc = coverImage
     ? `${import.meta.env.VITE_API_URL}/covers/${coverImage}`
     : null
@@ -17,7 +18,8 @@ export function BookCard({ title, author, coverImage }: BookCardProps) {
           <img
             src={imgSrc}
             alt={title}
-            loading="lazy"
+            loading={priority ? undefined : "lazy"}
+            fetchPriority={priority ? "high" : undefined}
             className="absolute inset-0 w-full h-full object-cover"
           />
         </>

@@ -22,13 +22,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Librarian — gérez votre bibliothèque en toute simplicité" />
+        <title>Librarian</title>
         <Meta />
         <Links />
       </head>
       <body className="font-k2d min-h-screen flex flex-col">
         <div className="px-5 max-w-5xl mx-auto w-full flex-1 flex flex-col">
           <Header />
-          <div className="flex-1">{children}</div>
+          <main className="flex-1">{children}</main>
         </div>
         <Footer />
         <Toaster
