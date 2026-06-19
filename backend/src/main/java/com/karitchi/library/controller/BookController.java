@@ -25,10 +25,4 @@ public class BookController {
     return bookService.getBookById(id);
   }
 
-  // Optional: POST endpoint to add a new book
-  @PostMapping
-  public Book addBook(@RequestBody Book book) {
-    return bookService.addBook(book);
-  }
-
 }
