@@ -12,6 +12,7 @@ import "./app.css";
 
 import { Toaster } from "sonner";
 import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 export const links: Route.LinksFunction = () => [];
 
@@ -27,6 +28,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body className="px-5 font-k2d max-w-5xl mx-auto">
         <Header />
         {children}
+        <Footer />
         <Toaster
           toastOptions={{
             style: { background: "#000", color: "#fff", border: "1px solid #fff", borderRadius: 0 },
