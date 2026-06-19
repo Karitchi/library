@@ -18,12 +18,19 @@ interface BookPage {
   pageSize: number;
 }
 
+let pageCache: { data: BookPage; timestamp: number } | null = null;
+const CACHE_TTL = 5 * 60 * 1000;
+
 export async function clientLoader({ request }: Route.ClientLoaderArgs) {
   const url = new URL(request.url);
   const search = url.searchParams.get("search") || "";
   const token = localStorage.getItem("token");
   const params = new URLSearchParams({ page: "0", size: "20" });
   if (search) params.set("search", search);
+
+  if (!search && pageCache && Date.now() - pageCache.timestamp < CACHE_TTL) {
+    return pageCache.data;
+  }
 
   const response = await fetch(`${import.meta.env.VITE_API_URL}/api/books?${params}`, {
     headers: { Authorization: `Bearer ${token}` },
@@ -32,9 +39,10 @@ export async function clientLoader({ request }: Route.ClientLoaderArgs) {
   if (!response.ok) throw new Error(`Erreur ${response.status}`);
 
   const data: BookPage = await response.json();
-  return new Response(JSON.stringify(data), {
-    headers: { "Cache-Control": "max-age=300" },
-  });
+
+  if (!search) pageCache = { data, timestamp: Date.now() };
+
+  return data;
 }
 
 export function HydrateFallback() {
