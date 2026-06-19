@@ -25,9 +25,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="px-5 font-k2d max-w-5xl mx-auto">
-        <Header />
-        {children}
+      <body className="font-k2d min-h-screen flex flex-col">
+        <div className="px-5 max-w-5xl mx-auto w-full flex-1 flex flex-col">
+          <Header />
+          <div className="flex-1">{children}</div>
+        </div>
         <Footer />
         <Toaster
           toastOptions={{
