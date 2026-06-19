@@ -15,7 +15,7 @@ interface RentalData {
 
 export async function clientLoader() {
   const token = localStorage.getItem('token');
-  const response = await fetch('http://localhost:8080/api/rentals/all', {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/rentals/all`, {
     headers: { 'Authorization': `Bearer ${token}` }
   });
 
@@ -35,7 +35,7 @@ export default function AllRentals({ loaderData }: Route.ComponentProps) {
 
   const handleReturn = async (rentalId: number) => {
     const token = localStorage.getItem('token');
-    const response = await fetch(`http://localhost:8080/api/rentals/${rentalId}/return`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/rentals/${rentalId}/return`, {
       method: 'PUT',
       headers: { 'Authorization': `Bearer ${token}` }
     });

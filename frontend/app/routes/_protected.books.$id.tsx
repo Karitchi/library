@@ -16,7 +16,7 @@ interface Book {
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   const { id } = params;
   const token = localStorage.getItem('token');
-  const response = await fetch(`http://localhost:8080/api/books/${id}`, {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/books/${id}`, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -46,7 +46,7 @@ export default function BookDetail({ loaderData }: Route.ComponentProps) {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch("http://localhost:8080/api/rentals", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/rentals`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

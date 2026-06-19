@@ -12,7 +12,7 @@ interface RentalData {
 
 export async function clientLoader() {
   const token = localStorage.getItem('token');
-  const response = await fetch('http://localhost:8080/api/rentals', {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/rentals`, {
     headers: { 'Authorization': `Bearer ${token}` }
   });
 

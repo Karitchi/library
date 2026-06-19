@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   const token = localStorage.getItem('token');
-  const response = await fetch('http://localhost:8080/api/books', {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/books`, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
