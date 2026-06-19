@@ -10,13 +10,17 @@ export function BookCard({ title, author, coverImage }: BookCardProps) {
     : null
 
   return (
-    <div className="bg-black h-56 text-white flex flex-col justify-end p-4 bg-cover bg-center relative overflow-hidden">
+    <div className="bg-black h-56 text-white flex flex-col justify-end p-4 relative overflow-hidden">
       {imgSrc && (
-        <img
-          src={imgSrc}
-          alt={title}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        <>
+          <div className="absolute inset-0 bg-neutral-800 animate-pulse" />
+          <img
+            src={imgSrc}
+            alt={title}
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </>
       )}
       <div className={`relative z-10 ${imgSrc ? 'bg-black/70 p-2' : ''}`}>
         <h3 className="text-sm leading-tight">{title}</h3>
