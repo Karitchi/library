@@ -1,9 +1,9 @@
-FROM maven:4-eclipse-temurin-25 AS builder
+FROM eclipse-temurin:25-jdk AS builder
 WORKDIR /app
-COPY pom.xml ./
-RUN mvn dependency:go-offline -DskipTests
+COPY mvnw .mvn pom.xml ./
+RUN chmod +x mvnw && ./mvnw dependency:go-offline -DskipTests
 COPY src src
-RUN mvn package -DskipTests
+RUN ./mvnw package -DskipTests
 
 FROM eclipse-temurin:25-jre
 WORKDIR /app
