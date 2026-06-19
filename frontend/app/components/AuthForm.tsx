@@ -13,7 +13,7 @@ interface AuthFormProps {
 }
 
 export function AuthForm({ title, submitLabel, submittingLabel, onSubmit, bottomText, bottomLink, bottomLinkLabel }: AuthFormProps) {
-  const [email, setEmail] = useState("test@test.com");
+  const [email, setEmail] = useState("user@library.com");
   const [password, setPassword] = useState("testtest");
   const [loading, setLoading] = useState(false);
 

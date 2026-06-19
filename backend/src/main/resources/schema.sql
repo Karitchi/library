@@ -51,7 +51,7 @@ INSERT INTO roles (name) VALUES ('librarian'), ('user');
 -- Insert default users (password: "testtest")
 INSERT INTO users (email, password, role_id) VALUES
   ('librarian@library.com', '$2a$10$l/InOIIhaW6C3.HENn5oPOf5NF.YUOLl0rLR76VKrHXoziCBLz7oq', 1),
-  ('test@test.com', '$2a$10$l/InOIIhaW6C3.HENn5oPOf5NF.YUOLl0rLR76VKrHXoziCBLz7oq', 2);
+  ('user@library.com', '$2a$10$l/InOIIhaW6C3.HENn5oPOf5NF.YUOLl0rLR76VKrHXoziCBLz7oq', 2);
 
 -- Indexes
 CREATE INDEX idx_rentals_user_id ON rentals(user_id);
