@@ -26,7 +26,7 @@ export default function Signup() {
     <div>
       <AuthTabs />
       <div className="flex justify-center mt-8">
-        <div className="flex flex-col items-center gap-6">
+        <div className="flex flex-col md:flex-row gap-6 items-start">
           <AuthForm
             title="Inscription"
             submitLabel="Inscription"
@@ -36,12 +36,24 @@ export default function Signup() {
             bottomLink="/signin"
             bottomLinkLabel="Connexion"
           />
-          <div className="border border-black p-4 text-sm max-w-md space-y-1">
-            <p>Ceci est un projet test pour apprendre Java Spring Boot.</p>
-            <p>Deux utilisateurs sont disponibles par défaut :</p>
+          <div className="border border-black p-4 text-sm max-w-xs space-y-3">
+            <p>
+              <strong>Librarian</strong> est une application de démonstration conçue pour apprendre
+              Java Spring Boot et React Router, développée en tandem avec une IA.
+            </p>
+            <p className="font-bold">Fonctionnalités</p>
+            <p>Catalogue de 55 livres avec couvertures · Emprunt et retour · Interface noir et blanc</p>
+            <hr className="border-black" />
+            <p className="font-bold">Rôles</p>
+            <p><span className="font-bold">Utilisateur</span> — parcourir le catalogue, emprunter et consulter ses emprunts</p>
+            <p><span className="font-bold">Bibliothécaire</span> — tout ce que l'utilisateur fait + voir tous les emprunts, gérer les retours</p>
+            <hr className="border-black" />
+            <p>Plus d'infos sur <a href="https://github.com/Karitchi/librarian" target="_blank" rel="noopener noreferrer" className="underline">GitHub</a>.
+            </p>
+            <hr className="border-black" />
+            <p className="font-bold">Comptes de démonstration :</p>
             <p><span className="font-bold">user@library.com</span> — mot de passe : <span className="font-bold">testtest</span> (utilisateur)</p>
             <p><span className="font-bold">librarian@library.com</span> — mot de passe : <span className="font-bold">testtest</span> (bibliothécaire)</p>
-            <p className="mt-2">Fonctionnalités : parcourir les livres, consulter les détails, louer des livres, gérer les retours.</p>
           </div>
         </div>
       </div>
